@@ -15,11 +15,9 @@ public class User {
 
     @Id
     private String username;
-    private String firstname;
-    private String lastname;
-//    @Convert(converter = BirthdayConvertor.class) // явно указываем класс-конвертер
-    @Column(name = "birth_date")
-    private Birthday birthDate;
+
+    @Embedded // опционально. Указыаем, что объект встраиваемый
+    private PersonalInfo personalInfo;
     @Enumerated(EnumType.STRING) // эта аннотация говорит, что этот enum будет храниться в таблицк как строка, а не как число (не 1, 2 и т.п.)
     private Role role;
     @JdbcTypeCode(SqlTypes.JSON) // сохраняем поле в базу в JSON формате
