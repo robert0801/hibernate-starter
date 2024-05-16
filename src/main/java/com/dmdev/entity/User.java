@@ -29,7 +29,7 @@ public class User {
     @JdbcTypeCode(SqlTypes.JSON) // сохраняем поле в базу в JSON формате
     private String info;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL) // FetchType.LAZY позволяет получать элементы не сразу, а только по запросу
+    @ManyToOne(fetch = FetchType.EAGER) // FetchType.LAZY позволяет получать элементы не сразу, а только по запросу
     @JoinColumn(name = "company_id") // Название колонки в таблице User, которая используется для мапинга
     private Company company;
 }
