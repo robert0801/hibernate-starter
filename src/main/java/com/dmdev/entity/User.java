@@ -8,6 +8,7 @@ import org.hibernate.type.SqlTypes;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@ToString(exclude = "company")
 @Builder
 @Entity
 @Table(name = "users", schema = "public")
@@ -28,7 +29,7 @@ public class User {
     @JdbcTypeCode(SqlTypes.JSON) // сохраняем поле в базу в JSON формате
     private String info;
 
-    @ManyToOne
+    @ManyToOne(optional = false, fetch = FetchType.LAZY) // FetchType.LAZY позволяет получать элементы не сразу, а только по запросу
     @JoinColumn(name = "company_id") // Название колонки в таблице User, которая используется для мапинга
     private Company company;
 }
