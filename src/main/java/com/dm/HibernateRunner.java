@@ -35,8 +35,14 @@ public class HibernateRunner {
 //                            """)
 //                    .build();
 //            session.delete(user);
-            User user = session.get(User.class, "ivan9@gmail.com");
+            User user1 = session.get(User.class, "ivan9@gmail.com");
+            user1.setLastname("Petrov"); // если так сделать, то в базе также обновится значения (хотя не делали UPDATE). Это DirtySession
+//            session.evict(user1); // удаляем сущность из контекста
 
+//            User user2 = session.get(User.class, "ivan9@gmail.com");
+            System.out.println(session.isDirty());
+
+            session.flush(); // синхронизация объетов с состояниес в БД
             session.getTransaction().commit();
         }
 
