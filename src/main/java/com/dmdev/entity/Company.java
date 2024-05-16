@@ -1,17 +1,15 @@
 package com.dmdev.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@ToString(exclude = "users")
+@EqualsAndHashCode(exclude = "users")
 @Builder
 @Entity
 public class Company {
@@ -21,4 +19,7 @@ public class Company {
     private Integer id;
 
     private String name;
+
+    @OneToMany(mappedBy = "company") // "company" - название поля в User, на которую делаем связь
+    private Set<User> users;
 }
