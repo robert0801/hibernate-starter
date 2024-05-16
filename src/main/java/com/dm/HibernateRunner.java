@@ -1,5 +1,7 @@
 package com.dm;
 
+import com.dm.converter.BirthdayConvertor;
+import com.dm.entity.Birthday;
 import com.dm.entity.Role;
 import com.dm.entity.User;
 import org.hibernate.Session;
@@ -14,6 +16,7 @@ public class HibernateRunner {
         Configuration configuration = new Configuration();
         // нужно добавлять, чтобы Hibernate зарегистрировать сущность User.class
         configuration.addAnnotatedClass(User.class);
+        configuration.addAttributeConverter(new BirthdayConvertor(), true); // указываем конвернет на уровне конфигурации
         configuration.configure();
 
         try (SessionFactory sessionFactory = configuration.buildSessionFactory();
@@ -21,11 +24,10 @@ public class HibernateRunner {
             session.beginTransaction();
 
             User user = User.builder()
-                    .username("ivan@gmail.com")
+                    .username("ivan1@gmail.com")
                     .firstname("Ivan")
                     .lastname("Ivanov")
-                    .birthDate(LocalDate.of(2000, 1, 19))
-                    .age(20)
+                    .birthDate(new Birthday(LocalDate.of(2000, 1, 19)))
                     .role(Role.ADMIN)
                     .build();
             session.persist(user);

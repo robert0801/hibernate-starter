@@ -1,5 +1,6 @@
 package com.dm.entity;
 
+import com.dm.converter.BirthdayConvertor;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,9 +18,9 @@ public class User {
     private String username;
     private String firstname;
     private String lastname;
+//    @Convert(converter = BirthdayConvertor.class) // явно указываем класс-конвертер
     @Column(name = "birth_date")
-    private LocalDate birthDate;
-    private Integer age;
+    private Birthday birthDate;
     @Enumerated(EnumType.STRING) // эта аннотация говорит, что этот enum будет храниться в таблицк как строка, а не как число (не 1, 2 и т.п.)
     private Role role;
 }
