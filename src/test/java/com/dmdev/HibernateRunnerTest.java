@@ -1,4 +1,4 @@
-package com.dm;
+package com.dmdev;
 
 import com.dmdev.entity.User;
 import jakarta.persistence.Column;
