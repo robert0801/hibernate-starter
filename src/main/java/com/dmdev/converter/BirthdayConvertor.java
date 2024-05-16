@@ -1,6 +1,6 @@
-package com.dm.converter;
+package com.dmdev.converter;
 
-import com.dm.entity.Birthday;
+import com.dmdev.entity.Birthday;
 import jakarta.persistence.AttributeConverter;
 
 import java.sql.Date;

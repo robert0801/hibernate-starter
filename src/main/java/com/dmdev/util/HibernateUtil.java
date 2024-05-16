@@ -1,7 +1,7 @@
-package com.dm.util;
+package com.dmdev.util;
 
-import com.dm.converter.BirthdayConvertor;
-import com.dm.entity.User;
+import com.dmdev.converter.BirthdayConvertor;
+import com.dmdev.entity.User;
 import lombok.experimental.UtilityClass;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

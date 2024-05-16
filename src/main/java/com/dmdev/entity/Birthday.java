@@ -1,4 +1,4 @@
-package com.dm.entity;
+package com.dmdev.entity;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;

@@ -1,4 +1,4 @@
-package com.dm.type;
+package com.dmdev.type;
 
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.usertype.UserType;
