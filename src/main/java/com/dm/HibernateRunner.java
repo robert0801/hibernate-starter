@@ -29,10 +29,15 @@ public class HibernateRunner {
                     .lastname("Ivanov")
                     .birthDate(new Birthday(LocalDate.of(2000, 1, 19)))
                     .role(Role.ADMIN)
+                    .info("""
+                            { "name" : "Ivan",
+                            "id" : 25 }
+                            """)
                     .build();
             session.persist(user);
 
             session.getTransaction().commit();
+            System.out.println();
         }
 
     }

@@ -1,10 +1,9 @@
 package com.dm.entity;
 
-import com.dm.converter.BirthdayConvertor;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.time.LocalDate;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,4 +22,6 @@ public class User {
     private Birthday birthDate;
     @Enumerated(EnumType.STRING) // эта аннотация говорит, что этот enum будет храниться в таблицк как строка, а не как число (не 1, 2 и т.п.)
     private Role role;
+    @JdbcTypeCode(SqlTypes.JSON) // сохраняем поле в базу в JSON формате
+    private String info;
 }
