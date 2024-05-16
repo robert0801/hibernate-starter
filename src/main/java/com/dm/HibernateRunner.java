@@ -11,7 +11,7 @@ public class HibernateRunner {
 
     public static void main(String[] args) {
         Configuration configuration = new Configuration();
-        // нужно добавлять, чтобы Hibernate отслеживал User class
+        // нужно добавлять, чтобы Hibernate зарегистрировать сущность User.class
         configuration.addAnnotatedClass(User.class);
         configuration.configure();
 
