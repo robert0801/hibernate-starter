@@ -11,6 +11,6 @@ public class ProxyTest {
     void testDynamic() {
         Company company = new Company();
         Proxy.newProxyInstance(company.getClass().getClassLoader(), company.getClass().getInterfaces(),
-                (proxy, method, args) -> method.invoke(company, args))
+                (proxy, method, args) -> method.invoke(company, args));
     }
 }
