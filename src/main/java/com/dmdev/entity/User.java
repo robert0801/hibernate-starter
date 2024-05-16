@@ -13,19 +13,11 @@ import org.hibernate.type.SqlTypes;
 @Table(name = "users", schema = "public")
 public class User {
 
-    @Id
-    @GeneratedValue(generator = "user_generator", strategy = GenerationType.TABLE)
-    @TableGenerator(name = "user_generator", table = "all_sequence",
-            pkColumnName = "table_name",
-            valueColumnName = "pk_value",
-            allocationSize = 1)
-    private Long id;
+    @EmbeddedId // аннотация, которая указыает, что Embedded элемент будет первичным ключом
+    private PersonalInfo personalInfo;
 
     @Column(unique = true)
     private String username;
-
-    @Embedded // опционально. Указыаем, что объект встраиваемый
-    private PersonalInfo personalInfo;
 
     @Enumerated(EnumType.STRING) // эта аннотация говорит, что этот enum будет храниться в таблицк как строка, а не как число (не 1, 2 и т.п.)
     private Role role;
