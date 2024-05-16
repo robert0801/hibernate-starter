@@ -13,7 +13,10 @@ import org.hibernate.type.SqlTypes;
 @Table(name = "users", schema = "public")
 public class User {
 
-    @EmbeddedId // аннотация, которая указыает, что Embedded элемент будет первичным ключом
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private PersonalInfo personalInfo;
 
     @Column(unique = true)
@@ -24,4 +27,8 @@ public class User {
 
     @JdbcTypeCode(SqlTypes.JSON) // сохраняем поле в базу в JSON формате
     private String info;
+
+    @ManyToOne
+    @JoinColumn(name = "company_id") // Название колонки в таблице User, которая используется для мапинга
+    private Company company;
 }
