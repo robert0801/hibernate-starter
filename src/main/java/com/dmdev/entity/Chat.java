@@ -12,7 +12,7 @@ import java.util.Set;
 @Builder
 @Entity
 @EqualsAndHashCode(of = "name")
-@ToString(exclude = "users")
+@ToString(exclude = "userChats")
 public class Chat {
 
     @Id
@@ -23,6 +23,6 @@ public class Chat {
     private String name;
 
     @Builder.Default
-    @ManyToMany(mappedBy = "chats")
-    private Set<User> users = new HashSet<>();
+    @OneToMany(mappedBy = "chat")
+    private Set<UsersChat> userChats = new HashSet<>();
 }

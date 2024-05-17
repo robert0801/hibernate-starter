@@ -1,9 +1,6 @@
 package com.dmdev;
 
-import com.dmdev.entity.Chat;
-import com.dmdev.entity.Company;
-import com.dmdev.entity.Profile;
-import com.dmdev.entity.User;
+import com.dmdev.entity.*;
 import com.dmdev.util.HibernateUtil;
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
@@ -18,6 +15,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.Instant;
 import java.util.Arrays;
 
 import static java.util.Optional.*;
@@ -32,8 +30,17 @@ class HibernateRunnerTest {
             session.beginTransaction();
 
             User user = session.get(User.class, 8L);
-            user.getChats().clear();
+            Chat chat = session.get(Chat.class, 1L);
 
+            UsersChat usersChat = UsersChat.builder()
+                    .createdAt(Instant.now())
+                    .createdBy(user.getUsername())
+                    .build();
+
+            usersChat.setUser(user);
+            usersChat.setChat(chat);
+
+            session.save(usersChat);
 //            var chat = Chat.builder()
 //                    .name("dmdev")
 //                    .build();
