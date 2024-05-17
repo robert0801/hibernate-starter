@@ -6,6 +6,7 @@ import com.dmdev.util.HibernateUtil;
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
 import lombok.Cleanup;
+import org.hibernate.Hibernate;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Constructor;
@@ -21,6 +22,20 @@ import static java.util.Optional.*;
 import static java.util.stream.Collectors.*;
 
 class HibernateRunnerTest {
+
+    @Test
+    void checkLazyInitialization() {
+        Company company;
+        try (var sessionFactory = HibernateUtil.buildSessionFactory();
+             var session = sessionFactory.openSession()) {
+            session.beginTransaction();
+
+            company = session.getReference(Company.class, 1);
+            session.getTransaction().commit();
+        }
+        var users = company.getUsers();
+        System.out.println("РАЗМЕР " + users.size());
+    }
 
     @Test
     void deleteCompany() {
@@ -62,6 +77,7 @@ class HibernateRunnerTest {
         session.beginTransaction();
 
         var company = session.get(Company.class, 1L);
+        System.out.println();
 
         session.getTransaction().commit();
     }
