@@ -23,7 +23,8 @@ public class Company {
     private String name;
 
     @Builder.Default
-    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL) // "company" - название поля в User, на которую делаем связь
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true) // orphanRemoval = true означает, что дочерный объект не может существовать бещ
+    // родительского.
     private Set<User> users = new HashSet<>();
 
     public void addUser(User user) {

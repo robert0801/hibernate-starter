@@ -24,6 +24,18 @@ import static java.util.stream.Collectors.*;
 class HibernateRunnerTest {
 
     @Test
+    void checkOrphanRemoval() {
+        try (var sessionFactory = HibernateUtil.buildSessionFactory();
+             var session = sessionFactory.openSession()) {
+            session.beginTransaction();
+
+            Company company = session.get(Company.class, 1);
+            company.getUsers().removeIf(user -> user.getId().equals(2L));
+            session.getTransaction().commit();
+        }
+    }
+
+    @Test
     void checkLazyInitialization() {
         Company company;
         try (var sessionFactory = HibernateUtil.buildSessionFactory();
