@@ -1,6 +1,7 @@
 package com.dmdev.util;
 
 import com.dmdev.converter.BirthdayConvertor;
+import com.dmdev.entity.Chat;
 import com.dmdev.entity.Company;
 import com.dmdev.entity.Profile;
 import com.dmdev.entity.User;
@@ -17,6 +18,7 @@ public class HibernateUtil {
         configuration.addAnnotatedClass(User.class);
         configuration.addAnnotatedClass(Company.class);
         configuration.addAnnotatedClass(Profile.class);
+        configuration.addAnnotatedClass(Chat.class);
         configuration.addAttributeConverter(new BirthdayConvertor(), true); // указываем конвернет на уровне конфигурации
         configuration.configure();
 

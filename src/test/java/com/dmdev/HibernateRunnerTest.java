@@ -1,5 +1,6 @@
 package com.dmdev;
 
+import com.dmdev.entity.Chat;
 import com.dmdev.entity.Company;
 import com.dmdev.entity.Profile;
 import com.dmdev.entity.User;
@@ -23,6 +24,25 @@ import static java.util.Optional.*;
 import static java.util.stream.Collectors.*;
 
 class HibernateRunnerTest {
+
+    @Test
+    void checkManyToMany() {
+        try (var sessionFactory = HibernateUtil.buildSessionFactory();
+             var session = sessionFactory.openSession()) {
+            session.beginTransaction();
+
+            User user = session.get(User.class, 8L);
+            user.getChats().clear();
+
+//            var chat = Chat.builder()
+//                    .name("dmdev")
+//                    .build();
+//            user.addChat(chat);
+//            session.save(chat);
+
+            session.getTransaction().commit();
+        }
+    }
 
     @Test
     void checkOneToOne() {
