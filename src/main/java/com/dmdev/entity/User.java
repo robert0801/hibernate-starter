@@ -8,6 +8,7 @@ import org.hibernate.type.SqlTypes;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@EqualsAndHashCode(of = "username")
 @ToString(exclude = "company")
 @Builder
 @Entity
