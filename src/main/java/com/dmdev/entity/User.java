@@ -9,7 +9,7 @@ import org.hibernate.type.SqlTypes;
 @AllArgsConstructor
 @Data
 @EqualsAndHashCode(of = "username")
-@ToString(exclude = "company")
+@ToString(exclude = {"company", "profile"})
 @Builder
 @Entity
 @Table(name = "users", schema = "public")
@@ -33,4 +33,7 @@ public class User {
     @ManyToOne(fetch = FetchType.LAZY) // FetchType.LAZY позволяет получать элементы не сразу, а только по запросу
     @JoinColumn(name = "company_id") // Название колонки в таблице User, которая используется для мапинга
     private Company company;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Profile profile;
 }
