@@ -3,7 +3,9 @@ package com.dmdev.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -24,5 +26,5 @@ public class Chat {
 
     @Builder.Default
     @OneToMany(mappedBy = "chat")
-    private Set<UsersChat> userChats = new HashSet<>();
+    private List<UsersChat> userChats = new ArrayList<>();
 }

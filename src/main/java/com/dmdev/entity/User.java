@@ -5,7 +5,9 @@ import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -16,7 +18,7 @@ import java.util.Set;
 @Builder
 @Entity
 @Table(name = "users", schema = "public")
-public class User {
+public class User implements Comparable<User> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,8 +32,8 @@ public class User {
     @Enumerated(EnumType.STRING) // эта аннотация говорит, что этот enum будет храниться в таблицк как строка, а не как число (не 1, 2 и т.п.)
     private Role role;
 
-    @JdbcTypeCode(SqlTypes.JSON) // сохраняем поле в базу в JSON формате
-    private String info;
+//    @JdbcTypeCode(SqlTypes.JSON) // сохраняем поле в базу в JSON формате
+//    private String info;
 
     @ManyToOne(fetch = FetchType.LAZY) // FetchType.LAZY позволяет получать элементы не сразу, а только по запросу
     @JoinColumn(name = "company_id") // Название колонки в таблице User, которая используется для мапинга
@@ -42,5 +44,10 @@ public class User {
 
     @Builder.Default
     @OneToMany(mappedBy = "user")
-    private Set<UsersChat> usersChats = new HashSet<>();
+    private List<UsersChat> usersChats = new ArrayList<>();
+
+    @Override
+    public int compareTo(User o) {
+        return username.compareTo(o.username);
+    }
 }

@@ -2,9 +2,9 @@ package com.dmdev.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.SortNatural;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,7 +25,17 @@ public class Company {
     @Builder.Default
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true) // orphanRemoval = true означает, что дочерный объект не может существовать бещ
     // родительского.
-    private Set<User> users = new HashSet<>();
+//    @OrderBy("username DESC, personalInfo.lastname ASC ")
+    @OrderColumn(name = "id")
+    @SortNatural
+    private Set<User> users = new TreeSet<>();
+
+    @Builder.Default
+    @ElementCollection
+    @CollectionTable(name = "company_locale", joinColumns = @JoinColumn(name = "company_id"))
+//    private List<LocaleInfo> locales = new ArrayList<>();
+    @Column(name = "description")
+    private List<String> locales = new ArrayList<>();
 
     public void addUser(User user) {
         users.add(user);
